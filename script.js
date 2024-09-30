@@ -1,3 +1,20 @@
+const senhaCorreta = "A0800"; // Senha para acesso
+
+// Função para verificar a senha
+function verificarSenha() {
+    const senha = document.getElementById("senha").value;
+    const mensagemErro = document.getElementById("mensagemErro");
+
+    if (senha === senhaCorreta) {
+        document.getElementById("loginContainer").style.display = "none";
+        document.getElementById("mainContainer").style.display = "block";
+        carregarAnotacoes();
+        carregarLembretes();
+    } else {
+        mensagemErro.textContent = "Senha incorreta. Tente novamente.";
+    }
+}
+
 // Função para salvar todas as anotações no localStorage
 function salvarAnotacoes() {
     const anotacoes = {
@@ -25,43 +42,37 @@ function carregarAnotacoes() {
     }
 }
 
-// Carregar as anotações quando a página for carregada
-window.onload = function() {
-    carregarAnotacoes();
-    carregarLembretes();
-};
-
 // Função para adicionar lembrete de prova
 function adicionarLembrete() {
     const nomeProva = document.getElementById("nomeProva").value;
     const dataProva = document.getElementById("dataProva").value;
 
-    if (nomeProva && dataProva) {
-        const lembrete = {
-            nome: nomeProva,
-            data: dataProva
-        };
-
-        let lembretes = JSON.parse(localStorage.getItem("lembretes")) || [];
-        lembretes.push(lembrete);
-
-        // Ordenar os lembretes pela data (do mais recente para o mais antigo)
-        lembretes.sort((a, b) => new Date(b.data) - new Date(a.data));
-
-        localStorage.setItem("lembretes", JSON.stringify(lembretes));
-        carregarLembretes();
-        alert("Lembrete adicionado!");
-    } else {
-        alert("Por favor, preencha o nome e a data da prova.");
+    if (!nomeProva || !dataProva) {
+        alert("Por favor, preencha o nome da prova e a data.");
+        return;
     }
+
+    const lembrete = { nome: nomeProva, data: dataProva };
+    const lembretes = JSON.parse(localStorage.getItem("lembretes")) || [];
+    
+    lembretes.push(lembrete);
+    localStorage.setItem("lembretes", JSON.stringify(lembretes));
+
+    document.getElementById("nomeProva").value = '';
+    document.getElementById("dataProva").value = '';
+
+    carregarLembretes();
 }
 
-// Função para carregar lembretes
+// Função para carregar lembretes da localStorage
 function carregarLembretes() {
     const tabelaLembretes = document.getElementById("tabelaLembretes");
     tabelaLembretes.innerHTML = ""; // Limpar tabela existente
 
     const lembretes = JSON.parse(localStorage.getItem("lembretes")) || [];
+
+    // Ordenar lembretes por data
+    lembretes.sort((a, b) => new Date(a.data) - new Date(b.data));
 
     lembretes.forEach(lembrete => {
         const novaLinha = document.createElement("tr");
