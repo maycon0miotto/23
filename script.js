@@ -64,6 +64,15 @@ function adicionarLembrete() {
     carregarLembretes();
 }
 
+// Função para calcular os dias restantes até a prova
+function calcularDiasRestantes(data) {
+    const hoje = new Date();
+    const dataProva = new Date(data);
+    const diffTime = dataProva - hoje;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Converte para dias
+    return diffDays >= 0 ? diffDays : 0; // Retorna 0 se a data já passou
+}
+
 // Função para carregar lembretes da localStorage
 function carregarLembretes() {
     const tabelaLembretes = document.getElementById("tabelaLembretes");
@@ -75,8 +84,9 @@ function carregarLembretes() {
     lembretes.sort((a, b) => new Date(a.data) - new Date(b.data));
 
     lembretes.forEach(lembrete => {
+        const diasRestantes = calcularDiasRestantes(lembrete.data);
         const novaLinha = document.createElement("tr");
-        novaLinha.innerHTML = `<td>${lembrete.nome}</td><td>${lembrete.data}</td>`;
+        novaLinha.innerHTML = `<td>${lembrete.nome}</td><td>${lembrete.data}</td><td>${diasRestantes}</td>`;
         tabelaLembretes.appendChild(novaLinha);
     });
 }
