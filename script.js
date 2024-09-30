@@ -1,4 +1,4 @@
-const senhaCorreta = "A0800"; // Senha para acesso
+ const senhaCorreta = "A0800"; // Senha para acesso
 
 // Função para verificar a senha
 function verificarSenha() {
