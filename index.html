@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="loginContainer">
+        <h1>Acesso ao Sistema</h1>
+        <input type="password" id="senha" placeholder="Digite a senha">
+        <button onclick="verificarSenha()">Acessar</button>
+        <p id="mensagemErro" class="error-message"></p>
+    </div>
+
+    <div class="container" id="mainContainer" style="display: none;">
         <h1>Minhas Anotações de Estudo</h1>
 
         <div class="materias-container">
