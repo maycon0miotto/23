@@ -1,4 +1,4 @@
- const senhaCorreta = "A0800"; 
+const senhaCorreta = "A0800"; // Senha para acesso
 
 // Função para verificar a senha
 function verificarSenha() {
@@ -15,7 +15,8 @@ function verificarSenha() {
     }
 }
 
- function salvarAnotacoes() {
+// Função para salvar todas as anotações no localStorage
+function salvarAnotacoes() {
     const anotacoes = {
         linguagens: document.getElementById("anotacoesLinguagens").value,
         engenharia: document.getElementById("anotacoesEngenharia").value,
