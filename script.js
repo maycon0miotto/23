@@ -1,4 +1,4 @@
- const senhaCorreta = "A0800"; // Senha para acesso
+const senhaCorreta = "A0800"; 
 
 // Função para verificar a senha
 function verificarSenha() {
@@ -15,7 +15,6 @@ function verificarSenha() {
     }
 }
 
-// Função para salvar todas as anotações no localStorage
 function salvarAnotacoes() {
     const anotacoes = {
         linguagens: document.getElementById("anotacoesLinguagens").value,
@@ -26,7 +25,6 @@ function salvarAnotacoes() {
     };
 
     localStorage.setItem("anotacoes", JSON.stringify(anotacoes));
-    alert("Todas as anotações foram salvas!");
 }
 
 // Função para carregar as anotações salvas do localStorage
@@ -90,3 +88,16 @@ function carregarLembretes() {
         tabelaLembretes.appendChild(novaLinha);
     });
 }
+
+// Adicionar evento de input para salvar anotações automaticamente
+const anotacoesTextAreas = [
+    document.getElementById("anotacoesLinguagens"),
+    document.getElementById("anotacoesEngenharia"),
+    document.getElementById("anotacoesFilosofia"),
+    document.getElementById("anotacoesModelagem"),
+    document.getElementById("anotacoesSistemas")
+];
+
+anotacoesTextAreas.forEach(textarea => {
+    textarea.addEventListener("input", salvarAnotacoes);
+});
