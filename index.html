@@ -1,64 +1,86 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anotações e Lembretes</title>
     <link rel="stylesheet" href="style.css">
+    <title>Anotações e Lembretes</title>
 </head>
 <body>
-    <div id="loginContainer">
-        <h2>Acesso ao Sistema</h2>
-        <input type="password" id="senha" placeholder="Digite a senha">
-        <button onclick="verificarSenha()">Entrar</button>
-        <p id="mensagemErro" style="color: red;"></p>
-    </div>
-
-    <div id="mainContainer" style="display: none;">
-        <h1 style="color: yellow;">Anotações</h1>
-        <p style="color: white;">As anotações são salvas automaticamente!</p>
+    <div class="container">
+        <div id="loginContainer">
+            <input type="password" id="password" placeholder="Digite a senha">
+            <button id="loginButton">Entrar</button>
+            <p id="message" style="color: red;"></p>
+        </div>
         
-        <div>
-            <h2>Linguagens Formais e Autômatos</h2>
-            <textarea id="anotacoesLinguagens" rows="4" placeholder="Anotações sobre Linguagens Formais e Autômatos"></textarea>
-        </div>
-        <div>
-            <h2>Engenharia de Software 2</h2>
-            <textarea id="anotacoesEngenharia" rows="4" placeholder="Anotações sobre Engenharia de Software 2"></textarea>
-        </div>
-        <div>
-            <h2>Filosofia</h2>
-            <textarea id="anotacoesFilosofia" rows="4" placeholder="Anotações sobre Filosofia"></textarea>
-        </div>
-        <div>
-            <h2>Modelagem de Software</h2>
-            <textarea id="anotacoesModelagem" rows="4" placeholder="Anotações sobre Modelagem de Software"></textarea>
-        </div>
-        <div>
-            <h2>Sistemas Operacionais</h2>
-            <textarea id="anotacoesSistemas" rows="4" placeholder="Anotações sobre Sistemas Operacionais"></textarea>
-        </div>
-
-        <h1 style="color: yellow;">Lembretes de Provas</h1>
-        <div>
-            <input type="text" id="nomeProva" placeholder="Nome da Prova">
-            <input type="date" id="dataProva">
-            <button onclick="adicionarLembrete()">Adicionar</button>
-        </div>
-        <table>
+        <h1>Anotações</h1>
+        <textarea id="notes" rows="10" placeholder="Digite suas anotações aqui..."></textarea>
+        <button id="saveButton">Salvar Automaticamente</button>
+        <p id="autoSaveMessage" style="color: green;">Salvo automaticamente.</p>
+        
+        <h2>Datas de Provas</h2>
+        <input type="text" id="examName" placeholder="Nome da Prova">
+        <input type="date" id="examDate">
+        <button id="addExamButton">Adicionar</button>
+        
+        <table id="examTable">
             <thead>
                 <tr>
                     <th>Nome da Prova</th>
-                    <th>Data da Prova</th>
-                    <th>Dias Restantes</th>
+                    <th>Data</th>
+                    <th>Restante (dias)</th>
                 </tr>
             </thead>
-            <tbody id="tabelaLembretes">
-                <!-- Lembretes serão adicionados aqui -->
+            <tbody>
+                <!-- As provas serão inseridas aqui -->
             </tbody>
         </table>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // JavaScript para salvar anotações automaticamente e gerenciar a tabela de provas
+        const notesArea = document.getElementById('notes');
+        const autoSaveMessage = document.getElementById('autoSaveMessage');
+        const examTable = document.getElementById('examTable').getElementsByTagName('tbody')[0];
+
+        // Função para salvar automaticamente as anotações
+        notesArea.addEventListener('input', () => {
+            localStorage.setItem('notes', notesArea.value);
+            autoSaveMessage.style.display = 'block';
+            setTimeout(() => {
+                autoSaveMessage.style.display = 'none';
+            }, 2000);
+        });
+
+        // Carregar anotações salvas
+        window.onload = () => {
+            const savedNotes = localStorage.getItem('notes');
+            if (savedNotes) {
+                notesArea.value = savedNotes;
+            }
+        };
+
+        // Adicionar provas à tabela
+        document.getElementById('addExamButton').onclick = () => {
+            const examName = document.getElementById('examName').value;
+            const examDate = document.getElementById('examDate').value;
+            if (examName && examDate) {
+                const examDateObj = new Date(examDate);
+                const today = new Date();
+                const timeDiff = examDateObj - today;
+                const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                const newRow = examTable.insertRow();
+                newRow.insertCell(0).innerText = examName;
+                newRow.insertCell(1).innerText = examDate;
+                newRow.insertCell(2).innerText = daysRemaining;
+
+                // Limpar os campos após adicionar
+                document.getElementById('examName').value = '';
+                document.getElementById('examDate').value = '';
+            }
+        };
+    </script>
 </body>
 </html>
