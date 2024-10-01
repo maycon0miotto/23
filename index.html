@@ -1,80 +1,62 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+ <!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notas de Estudo com Lembretes</title>
+    <title>Anotações e Lembretes</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container" id="loginContainer">
-        <h1>Acesso ao Sistema</h1>
+    <div id="loginContainer">
+        <h2>Acesso ao Sistema</h2>
         <input type="password" id="senha" placeholder="Digite a senha">
-        <button onclick="verificarSenha()">Acessar</button>
-        <p id="mensagemErro" class="error-message"></p>
+        <button onclick="verificarSenha()">Entrar</button>
+        <p id="mensagemErro" style="color: red;"></p>
     </div>
 
-    <div class="container" id="mainContainer" style="display: none;">
-        <h1>Minhas Anotações de Estudo</h1>
-
-        <div class="materias-container">
-            <!-- Linguagens Formais e Autômatos -->
-            <div class="materia" id="linguagens">
-                <h2>Linguagens Formais e Autômatos</h2>
-                <textarea id="anotacoesLinguagens" placeholder="Escreva suas anotações aqui..."></textarea>
-            </div>
-
-            <!-- Engenharia de Software 2 -->
-            <div class="materia" id="engenharia">
-                <h2>Engenharia de Software 2</h2>
-                <textarea id="anotacoesEngenharia" placeholder="Escreva suas anotações aqui..."></textarea>
-            </div>
-
-            <!-- Filosofia -->
-            <div class="materia" id="filosofia">
-                <h2>Filosofia</h2>
-                <textarea id="anotacoesFilosofia" placeholder="Escreva suas anotações aqui..."></textarea>
-            </div>
-
-            <!-- Modelagem de Software -->
-            <div class="materia" id="modelagem">
-                <h2>Modelagem de Software</h2>
-                <textarea id="anotacoesModelagem" placeholder="Escreva suas anotações aqui..."></textarea>
-            </div>
-
-            <!-- Sistemas Operacionais -->
-            <div class="materia" id="sistemas">
-                <h2>Sistemas Operacionais</h2>
-                <textarea id="anotacoesSistemas" placeholder="Escreva suas anotações aqui..."></textarea>
-            </div>
+    <div id="mainContainer" style="display: none;">
+        <h1 style="color: yellow;">Anotações</h1>
+        <p style="color: white;">As anotações são salvas automaticamente!</p>
+        
+        <div>
+            <h2>Linguagens Formais e Autômatos</h2>
+            <textarea id="anotacoesLinguagens" rows="4" placeholder="Anotações sobre Linguagens Formais e Autômatos"></textarea>
+        </div>
+        <div>
+            <h2>Engenharia de Software 2</h2>
+            <textarea id="anotacoesEngenharia" rows="4" placeholder="Anotações sobre Engenharia de Software 2"></textarea>
+        </div>
+        <div>
+            <h2>Filosofia</h2>
+            <textarea id="anotacoesFilosofia" rows="4" placeholder="Anotações sobre Filosofia"></textarea>
+        </div>
+        <div>
+            <h2>Modelagem de Software</h2>
+            <textarea id="anotacoesModelagem" rows="4" placeholder="Anotações sobre Modelagem de Software"></textarea>
+        </div>
+        <div>
+            <h2>Sistemas Operacionais</h2>
+            <textarea id="anotacoesSistemas" rows="4" placeholder="Anotações sobre Sistemas Operacionais"></textarea>
         </div>
 
-        <button onclick="salvarAnotacoes()">Salvar Todas as Anotações</button>
-
-        <!-- Seção para adicionar lembrete de prova -->
-        <div class="lembrete-container">
-            <h2 class="titulo-lembrete">Adicionar Lembrete de Prova</h2>
+        <h1 style="color: yellow;">Lembretes de Provas</h1>
+        <div>
             <input type="text" id="nomeProva" placeholder="Nome da Prova">
             <input type="date" id="dataProva">
             <button onclick="adicionarLembrete()">Adicionar</button>
         </div>
-
-        <!-- Tabela para exibir lembretes -->
-        <div class="lembretes-lista" id="lembretesLista">
-            <h2 class="titulo-tabela">Lembretes de Provas</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome da Prova</th>
-                        <th>Data</th>
-                        <th>Restante (dias)</th>
-                    </tr>
-                </thead>
-                <tbody id="tabelaLembretes">
-                    <!-- Lembretes aparecerão aqui -->
-                </tbody>
-            </table>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome da Prova</th>
+                    <th>Data da Prova</th>
+                    <th>Dias Restantes</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaLembretes">
+                <!-- Lembretes serão adicionados aqui -->
+            </tbody>
+        </table>
     </div>
 
     <script src="script.js"></script>
