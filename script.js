@@ -1,6 +1,6 @@
-const senhaCorreta = "A0800"; // Senha para acesso
+const senhaCorreta = "A0800"; 
 
-// Função para verificar a senha
+
 function verificarSenha() {
     const senha = document.getElementById("senha").value;
     const mensagemErro = document.getElementById("mensagemErro");
@@ -15,7 +15,7 @@ function verificarSenha() {
     }
 }
 
-// Função para salvar todas as anotações no localStorage
+
 function salvarAnotacoes() {
     const anotacoes = {
         linguagens: document.getElementById("anotacoesLinguagens").value,
@@ -29,7 +29,7 @@ function salvarAnotacoes() {
     alert("Todas as anotações foram salvas!");
 }
 
-// Função para carregar as anotações salvas do localStorage
+
 function carregarAnotacoes() {
     const anotacoesSalvas = JSON.parse(localStorage.getItem("anotacoes"));
 
@@ -42,7 +42,7 @@ function carregarAnotacoes() {
     }
 }
 
-// Função para adicionar lembrete de prova
+
 function adicionarLembrete() {
     const nomeProva = document.getElementById("nomeProva").value;
     const dataProva = document.getElementById("dataProva").value;
@@ -64,23 +64,23 @@ function adicionarLembrete() {
     carregarLembretes();
 }
 
-// Função para calcular os dias restantes até a prova
+
 function calcularDiasRestantes(data) {
     const hoje = new Date();
     const dataProva = new Date(data);
     const diffTime = dataProva - hoje;
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Converte para dias
-    return diffDays >= 0 ? diffDays : 0; // Retorna 0 se a data já passou
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    return diffDays >= 0 ? diffDays : 0; 
 }
 
-// Função para carregar lembretes da localStorage
+
 function carregarLembretes() {
     const tabelaLembretes = document.getElementById("tabelaLembretes");
-    tabelaLembretes.innerHTML = ""; // Limpar tabela existente
+    tabelaLembretes.innerHTML = ""; 
 
     const lembretes = JSON.parse(localStorage.getItem("lembretes")) || [];
 
-    // Ordenar lembretes por data
+   
     lembretes.sort((a, b) => new Date(a.data) - new Date(b.data));
 
     lembretes.forEach(lembrete => {
